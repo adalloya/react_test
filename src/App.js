@@ -1,28 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Card from "./components/Card";
+import Nav from "./components/Nav";
+import Form from "./components/Form";
+import Registration from "./components/Registration";
+import Login from "./components/Login";
+import Footer from "./components/Footer";
+import Myads from "./components/Myads";
+import Filter from "./components/Filter";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div>
+      <Nav/>
+      <Myads/>
+      <Filter/>
+      <Card/>
+      <Form/>
+      <Registration/>
+      <Login/>
+      <Footer/>
+    </div>
+  );
 }
 
 export default App;
