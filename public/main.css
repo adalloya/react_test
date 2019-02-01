@@ -173,7 +173,7 @@
     margin-left: 1%;
     background-color: rgb(247, 130, 21);
   }
-  @media (max-width: 992px) {
+  @media (max-width: 990px) {
     .resizeimg {
       height: auto;
     }
