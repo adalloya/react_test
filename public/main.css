@@ -173,7 +173,7 @@
     margin-left: 1%;
     background-color: rgb(247, 130, 21);
   }
-  @media (max-width: 812px) {
+  /* @media (max-width: 812px) {
     .resizeimg {
       height: auto;
     }
@@ -203,4 +203,4 @@
       width: auto;
       height: 350px;
     }
-  }
+  } */
