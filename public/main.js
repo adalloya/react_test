@@ -24,6 +24,9 @@ $(document).ready(function() {
   var category= "";
   var location= "";
   var selectedFile= " ";
+  var emaillogin= null
+  var contraseñalogin= null
+
 
   var d = new Date();
 
@@ -197,8 +200,7 @@ $("#new-register").addClass("disabled")
 
     
   });
-
-
+  
   $("#loginbutton").on("click", function(event) {
     event.preventDefault();
 
@@ -216,10 +218,10 @@ $("#new-register").addClass("disabled")
           userloginemail =data.val().useremail;
 
         });
-
-        if (userlogin=contraseñalogin) {
+        if (userlogin===contraseñalogin) {
             
-            $("#loginmodal").html("Haz inciado sesion"+" "+ userloginname + "<hr>"+"Puedes publicar con el icono rojo y el signo de mas");
+
+            $("#loginmodal").html("<div class='loginmessage center'><i class='large loginicon material-icons center'>check_circle</i></div><div class='loginmessage center'>Haz inciado sesion"+" "+ userloginname + "<hr>"+"¡Ya puedes publicar todos tus videojuegos y comprar nuevos!</div>");
             $('#posticon').removeClass("hide");
             $('#posticon2').removeClass("hide");
             $("#nombre").html(userloginname);
@@ -242,8 +244,7 @@ $("#new-register").addClass("disabled")
             });
 
           } else {
-            console.log("The email or password is incorrect");
-            $("#statusmessage").html("The email or password is incorrect, please try again");
+            $("#statusmessage").html("El email o el password son incorrectos, intentalo de nuevo");
           }
     });
 

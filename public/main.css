@@ -34,6 +34,14 @@
   main {
   flex: 1 0 auto;
   }
+
+  .loginmessage{
+      color: green;
+      font-weight: bold;
+  }
+  .loginicon{
+      color: green;
+  }
   #status{
     color: red;
   }

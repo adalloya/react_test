@@ -14,7 +14,7 @@ function Search() {
               
                                         <div className="input-field col s12">
                                           <input id="searchinput" type="text" className="validate" data-length="15" maxLength="15"></input>
-                                          <label htmlFor="searchinput">Busca unicamente por el nombre de la consola (Prueba: PS4 o SWITCH)</label>
+                                          <label htmlFor="searchinput">Busca unicamente por el nombre de la consola:</label>
                                         </div>
                                         <div className="input-field col s12">
                                           <button id="searchbutton" className="btn waves-effect waves-light modal-close">Buscar<i className="material-icons right">send</i>
