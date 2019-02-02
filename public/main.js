@@ -647,6 +647,51 @@ $("#VITA").on("click", function() {
         );
     });
 });
+$("#Ver").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
+
+    database.ref("ads").on("child_added", function(childSnapshot) {
+
+        $("#number").html(childSnapshot.val().id+ " "+ "Articulos en venta");
+        // full list of items to the well
+        $("#to-dos").prepend(
+               "<div id="+childSnapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+ 
+        "<div class='card-image waves-effect waves-block waves-light'>" +
+        "<img class='activator cardimage' src="+"'"+childSnapshot.val().image+"'"+"></img>"+ "<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+        "</div>"+
+        "<div class='card-content "+childSnapshot.val().consola+"'>"+
+        "<span class='activator titulo'>"+childSnapshot.val().item+"</span>"+
+        "</div>"+
+
+        "<div class='card-details'>"+
+        "<p><i class='tiny material-icons'>videogame_asset</i> " +childSnapshot.val().category+" "+childSnapshot.val().consola+"</p>"+
+         "<p><i class='tiny material-icons'>place</i> "+childSnapshot.val().location+"</p>"+
+         "<p><i class='tiny material-icons'>class</i> "+childSnapshot.val().status+"</p>"+
+         "<p><i class='tiny material-icons'>monetization_on</i> "+childSnapshot.val().price+" MXN</p>"+
+         "<p><i class='tiny material-icons'>date_range</i> "+childSnapshot.val().dateposted+"</p>"
+         +"<hr></hr>"+
+         "</div>"+ 
+        "<div class='modal-footer center'>"+
+        "<a href=tel:'"+childSnapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= mailto:'"+childSnapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+        "</div>"+
+        
+        "<div class='card-reveal'>"+
+        "<span class='card-title'>"+"<i class='tiny left material-icons IMG2'>close</i>"+childSnapshot.val().item+"</span>"+
+        "<p><i class='tiny material-icons'>videogame_asset</i> "+childSnapshot.val().consola+"</p>"+
+        "<hr></hr>"+
+        "<p ><i class='tiny material-icons'>description</i> "+childSnapshot.val().description+"</p>"+
+        "<hr></hr>"+
+        "<img class='responsive-img' src='"+childSnapshot.val().image+"'>"+
+        "<hr></hr>"+
+        "<a href=tel:'"+childSnapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= mailto:'"+childSnapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+        "</div>"+
+        "</div>"+
+        "</div>"+
+        "</div>"  
+
+        );
+    });
+});
 $("#WiiU").on("click", function() { 
     $("#to-dos").html("No tenemos actualmente articulos");
     var ref = database.ref("ads");
@@ -792,7 +837,7 @@ $("#Accesorios").on("click", function() {
     $("#to-dos").html("No tenemos actualmente articulos");
     var ref = database.ref("ads");
 
-    ref.orderByChild("category").equalTo("Accesorios").on("child_added", function(snapshot) {
+    ref.orderByChild("category").equalTo("Accesorio").on("child_added", function(snapshot) {
         $("#to-dos").html("");
         $("#to-dos").prepend(
             "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
