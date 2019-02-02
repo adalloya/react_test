@@ -70,31 +70,48 @@
   
   .card-content{
     padding: 0 !important;
-    color: white;
     align-content: center;
     text-align: center;
     border-radius: 50px;
     margin-top: 5%;
+    color: white !important;
   }
   
   .PS4, PS3, VITA{
     background: rgb(28, 40, 212);
   }
-  
+
+  .IMG{
+      padding: 0 !important;
+      align-content: left !important;
+  }
+
+  .IMG1{
+      padding: 0 !important;
+      align-content: left !important;
+      opacity: .3;
+      color: blue;
+  }
+  .IMG2{
+    padding: 0 !important;
+    align-content: left !important;
+    opacity: .8;
+    color: reD !important;
+}
   .XBOX{
     background: rgb(2, 156, 48);
   }
   
-  .Switch, WIIU{
+  .SWITCH, WIIU{
     background: rgb(218, 41, 10);
   }
   
-  .Nintendo{
+  .NINTENDO{
     background:rgb(206, 204, 204);
-    color: red;
+    color: red !important;
   }
   
-  .Clasico{
+  .CLASICO{
     background-color: rgb(196, 168, 12);
   }
   hr{
@@ -149,8 +166,8 @@
   }
   .card{
     margin: 10px;
-    height: 400px;
-    width: 20% !important;
+    height: 430px;
+    width: 30% !important;
   }
   
   .titulo{

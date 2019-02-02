@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Footer from "./components/Footer";
 import Myads from "./components/Myads";
 import Filter from "./components/Filter";
+import Search from "./components/Search";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Registration/>
       <Login/>
       <Footer/>
+      <Search/>
     </div>
   );
 }

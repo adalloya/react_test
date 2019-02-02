@@ -36,7 +36,7 @@ function Registration() {
                                     <label>¿Donde Vives?</label>
                              </div>
                              <div className="input-field col s12">
-                                          <input id="userpassword" type="text" className="validate" data-length="10" maxLength="10"></input>
+                                          <input id="userpassword" type="password"  className="validate" data-length="10" maxLength="10"></input>
                                           <label htmlFor="userpassword">Contraseña</label>
                             </div>
 

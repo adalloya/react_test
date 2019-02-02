@@ -27,13 +27,13 @@ function Form() {
                                 <div className="input-field col s12">
                                     <select id="consola">
                                       <option value="" defaultValue>Selecciona la Consola</option>
-                                      <option value="Nintendo 3DS"> Nintendo 3DS</option>
-                                      <option value="Clasico">Clasico</option>
+                                      <option value="NINTENDO 3DS"> Nintendo 3DS</option>
+                                      <option value="CLASICO">Clasico</option>
                                       <option value="PS3">PS3</option>
                                       <option value="PS4">PS4</option>
-                                      <option value="Switch">Switch</option>
-                                      <option value="Vita">Vita</option>
-                                      <option value="Vita">WiiU</option>
+                                      <option value="SWITCH">Switch</option>
+                                      <option value="VITA">Vita</option>
+                                      <option value="WIIU">WiiU</option>
                                       <option value="XBOX ONE">XBOX ONE</option>
                                   
                                     </select>

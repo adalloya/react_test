@@ -52,17 +52,23 @@ connectedRef.on("value", function(snap) {
 connectionsRef.on("value", function(snap) {
   $("#number1").text(snap.numChildren());
   $("#number1").append(""+ " "+"Personas comprando");
+  $("#numbermobile1").text(snap.numChildren());
+  $("#numbermobile1").append(""+ " "+"Personas comprando");
 });
 
 adnumber.on("value",function(snap) {
 $("#number").text(snap.numChildren());
 $("#number").append(""+ " "+"Articulos en venta");
+$("#numbermobile").text(snap.numChildren());
+$("#numbermobile").append(""+ " "+"Articulos en venta");
 toDoCount= snap.numChildren();
 });
 
 registerusers.on("value",function(snap){
     $("#number2").text(snap.numChildren());
     $("#number2").append(""+ " "+"Usuarios Registrados")
+    $("#numbermobile2").text(snap.numChildren());
+    $("#numbermobile2").append(""+ " "+"Usuarios Registrados")
 })
 
  // ON BUTTON SELECT FORM-----------------------------------------------------------------
@@ -191,6 +197,8 @@ $("#new-register").addClass("disabled")
 
     
   });
+
+
   $("#loginbutton").on("click", function(event) {
     event.preventDefault();
 
@@ -213,12 +221,14 @@ $("#new-register").addClass("disabled")
             
             $("#loginmodal").html("Haz inciado sesion"+" "+ userloginname + "<hr>"+"Puedes publicar con el icono rojo y el signo de mas");
             $('#posticon').removeClass("hide");
+            $('#posticon2').removeClass("hide");
             $("#nombre").html(userloginname);
             $("#phone").html(userloginphone);
             $("#email").html(userloginemail);
             $('#usericon').addClass("hide");
             $('#viewicon').removeClass("hide");
-
+            $("#usernamelog").html("Bienvenido "+userloginname);
+            $("#usernamelogmobile").html("Bienvenido "+userloginname);
             database.ref('ads').orderByChild("email").equalTo(userloginemail).on("value", function(snapshot) {
                 snapshot.forEach(function(data) {
                     $("#userads").html(
@@ -233,12 +243,72 @@ $("#new-register").addClass("disabled")
 
           } else {
             console.log("The email or password is incorrect");
-            $("#status").html("The email or password is incorrect, please try again");
+            $("#statusmessage").html("The email or password is incorrect, please try again");
           }
     });
 
   });
-  
+
+  function upperCaseF(a){
+    setTimeout(function(){
+        a.value = a.value.toUpperCase();
+    }, 1);
+}
+
+  $("#searchbutton").on("click", function(event) {
+    event.preventDefault();
+
+    var searchinput= $("#searchinput").val().trim();
+    var searchinputcase= searchinput.toUpperCase();
+
+    $("#to-dos").html("No tenemos actualmente articulos con el termino "+"' "+searchinputcase+ " '"+" intenta con otra palabra");
+    var ref = database.ref("ads");
+
+console.log(searchinput);
+
+ref.orderByChild("consola").equalTo(searchinputcase).on("child_added", function(snapshot) {
+    $("#to-dos").prepend(
+        "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+        "<div class='card-image waves-effect waves-block waves-light'>" +
+        "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+        "</div>"+
+        "<div class='card-content "+snapshot.val().consola+"'>"+
+        "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
+        "</div>"+
+
+        "<div class='card-details'>"+
+        "<div class=<'col s6'>"+
+        "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
+         "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
+
+         "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
+         "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
+         +"<hr></hr>"+
+         "</div>"+ 
+        "<div class='modal-footer center'>"+
+        "<a href='tel:"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+        "</div>"+
+        
+        "<div class='card-reveal'>"+
+        "<span class='card-title titulo"+snapshot.val().consola+"'>"+snapshot.val().item+"</span>"+
+        "<p><i class='tiny material-icons'>videogame_asset</i> "+snapshot.val().consola+"</p>"+
+        "<hr></hr>"+
+        "<p ><i class='tiny material-icons'>description</i> "+snapshot.val().description+"</p>"+
+        "<hr></hr>"+
+        "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
+        "<hr></hr>"+
+        "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+        "</div>"+
+        "</div>"+
+        "</div>"+
+        "</div>"    
+
+    );
+});
+    
+         
+    });
+
   $("#file").on("change",function(event){
     selectedFile= event.target.files[0];
     $("#uploadButton").show();
@@ -294,30 +364,31 @@ $("#new-register").addClass("disabled")
     console.log("Errors handled: " + errorObject.code);
   });
 //   Filters------------------------------------------------------------------------------------------------
-  $("#Consolas").on("click", function() { 
-    $("#to-dos").html("");
+$("#Consolas1").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
     var ref = database.ref("ads");
 
-    ref.orderByChild("consola").on("child_added", function(snapshot) {
+    ref.orderByChild("category").equalTo("Consola").on("child_added", function(snapshot) {
         $("#to-dos").prepend(
             "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
             "<div class='card-image waves-effect waves-block waves-light'>" +
-            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
             "</div>"+
             "<div class='card-content "+snapshot.val().consola+"'>"+
             "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
             "</div>"+
     
             "<div class='card-details'>"+
-            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+
+            "<div class=<'col s6'>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
              "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
-             "<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+
+
              "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
              "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
              +"<hr></hr>"+
              "</div>"+ 
             "<div class='modal-footer center'>"+
-            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= mailto:'"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "<a href='tel:"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
             "</div>"+
             
             "<div class='card-reveal'>"+
@@ -328,7 +399,7 @@ $("#new-register").addClass("disabled")
             "<hr></hr>"+
             "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
             "<hr></hr>"+
-            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= mailto:'"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
             "</div>"+
             "</div>"+
             "</div>"+
@@ -340,16 +411,392 @@ $("#new-register").addClass("disabled")
         );
     });
 });
-
 $("#PS4").on("click", function() { 
-    $("#to-dos").html("");
+    $("#to-dos").html("No tenemos actualmente articulos");
     var ref = database.ref("ads");
 
     ref.orderByChild("consola").equalTo("PS4").on("child_added", function(snapshot) {
         $("#to-dos").prepend(
             "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
             "<div class='card-image waves-effect waves-block waves-light'>" +
-            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+            "</div>"+
+            "<div class='card-content "+snapshot.val().consola+"'>"+
+            "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
+            "</div>"+
+    
+            "<div class='card-details'>"+
+            "<div class=<'col s6'>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
+             "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
+
+             "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
+             "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
+             +"<hr></hr>"+
+             "</div>"+ 
+            "<div class='modal-footer center'>"+
+            "<a href='tel:"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            
+            "<div class='card-reveal'>"+
+            "<span class='card-title titulo"+snapshot.val().consola+"'>"+snapshot.val().item+"</span>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> "+snapshot.val().consola+"</p>"+
+            "<hr></hr>"+
+            "<p ><i class='tiny material-icons'>description</i> "+snapshot.val().description+"</p>"+
+            "<hr></hr>"+
+            "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
+            "<hr></hr>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            "</div>"+
+            "</div>"+
+            "</div>"    
+
+
+
+
+        );
+    });
+});
+$("#Clasico").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
+    var ref = database.ref("ads");
+
+    ref.orderByChild("consola").equalTo("CLASICO").on("child_added", function(snapshot) {
+        $("#to-dos").prepend(
+            "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+            "<div class='card-image waves-effect waves-block waves-light'>" +
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+            "</div>"+
+            "<div class='card-content "+snapshot.val().consola+"'>"+
+            "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
+            "</div>"+
+    
+            "<div class='card-details'>"+
+            "<div class=<'col s6'>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
+             "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
+
+             "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
+             "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
+             +"<hr></hr>"+
+             "</div>"+ 
+            "<div class='modal-footer center'>"+
+            "<a href='tel:"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            
+            "<div class='card-reveal'>"+
+            "<span class='card-title titulo"+snapshot.val().consola+"'>"+snapshot.val().item+"</span>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> "+snapshot.val().consola+"</p>"+
+            "<hr></hr>"+
+            "<p ><i class='tiny material-icons'>description</i> "+snapshot.val().description+"</p>"+
+            "<hr></hr>"+
+            "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
+            "<hr></hr>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            "</div>"+
+            "</div>"+
+            "</div>"    
+
+
+
+
+        );
+    });
+});
+$("#PS3").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
+    var ref = database.ref("ads");
+
+    ref.orderByChild("consola").equalTo("PS3").on("child_added", function(snapshot) {
+        $("#to-dos").prepend(
+            "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+            "<div class='card-image waves-effect waves-block waves-light'>" +
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+            "</div>"+
+            "<div class='card-content "+snapshot.val().consola+"'>"+
+            "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
+            "</div>"+
+    
+            "<div class='card-details'>"+
+            "<div class=<'col s6'>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
+             "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
+
+             "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
+             "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
+             +"<hr></hr>"+
+             "</div>"+ 
+            "<div class='modal-footer center'>"+
+            "<a href='tel:"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            
+            "<div class='card-reveal'>"+
+            "<span class='card-title titulo"+snapshot.val().consola+"'>"+snapshot.val().item+"</span>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> "+snapshot.val().consola+"</p>"+
+            "<hr></hr>"+
+            "<p ><i class='tiny material-icons'>description</i> "+snapshot.val().description+"</p>"+
+            "<hr></hr>"+
+            "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
+            "<hr></hr>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            "</div>"+
+            "</div>"+
+            "</div>"    
+
+
+
+
+        );
+    });
+});
+$("#Switch").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
+    var ref = database.ref("ads");
+
+    ref.orderByChild("consola").equalTo("SWITCH").on("child_added", function(snapshot) {
+        $("#to-dos").prepend(
+            "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+            "<div class='card-image waves-effect waves-block waves-light'>" +
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+            "</div>"+
+            "<div class='card-content "+snapshot.val().consola+"'>"+
+            "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
+            "</div>"+
+    
+            "<div class='card-details'>"+
+            "<div class=<'col s6'>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
+             "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
+
+             "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
+             "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
+             +"<hr></hr>"+
+             "</div>"+ 
+            "<div class='modal-footer center'>"+
+            "<a href='tel:"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            
+            "<div class='card-reveal'>"+
+            "<span class='card-title titulo"+snapshot.val().consola+"'>"+snapshot.val().item+"</span>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> "+snapshot.val().consola+"</p>"+
+            "<hr></hr>"+
+            "<p ><i class='tiny material-icons'>description</i> "+snapshot.val().description+"</p>"+
+            "<hr></hr>"+
+            "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
+            "<hr></hr>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            "</div>"+
+            "</div>"+
+            "</div>"    
+
+
+
+
+        );
+    });
+});
+$("#VITA").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
+    var ref = database.ref("ads");
+
+    ref.orderByChild("consola").equalTo("VITA").on("child_added", function(snapshot) {
+        $("#to-dos").prepend(
+            "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+            "<div class='card-image waves-effect waves-block waves-light'>" +
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+            "</div>"+
+            "<div class='card-content "+snapshot.val().consola+"'>"+
+            "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
+            "</div>"+
+    
+            "<div class='card-details'>"+
+            "<div class=<'col s6'>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
+             "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
+
+             "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
+             "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
+             +"<hr></hr>"+
+             "</div>"+ 
+            "<div class='modal-footer center'>"+
+            "<a href='tel:"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            
+            "<div class='card-reveal'>"+
+            "<span class='card-title titulo"+snapshot.val().consola+"'>"+snapshot.val().item+"</span>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> "+snapshot.val().consola+"</p>"+
+            "<hr></hr>"+
+            "<p ><i class='tiny material-icons'>description</i> "+snapshot.val().description+"</p>"+
+            "<hr></hr>"+
+            "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
+            "<hr></hr>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            "</div>"+
+            "</div>"+
+            "</div>"    
+
+
+
+
+        );
+    });
+});
+$("#WiiU").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
+    var ref = database.ref("ads");
+
+    ref.orderByChild("consola").equalTo("WIIU").on("child_added", function(snapshot) {
+        $("#to-dos").prepend(
+            "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+            "<div class='card-image waves-effect waves-block waves-light'>" +
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+            "</div>"+
+            "<div class='card-content "+snapshot.val().consola+"'>"+
+            "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
+            "</div>"+
+    
+            "<div class='card-details'>"+
+            "<div class=<'col s6'>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
+             "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
+
+             "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
+             "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
+             +"<hr></hr>"+
+             "</div>"+ 
+            "<div class='modal-footer center'>"+
+            "<a href='tel:"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            
+            "<div class='card-reveal'>"+
+            "<span class='card-title titulo"+snapshot.val().consola+"'>"+snapshot.val().item+"</span>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> "+snapshot.val().consola+"</p>"+
+            "<hr></hr>"+
+            "<p ><i class='tiny material-icons'>description</i> "+snapshot.val().description+"</p>"+
+            "<hr></hr>"+
+            "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
+            "<hr></hr>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            "</div>"+
+            "</div>"+
+            "</div>"    
+
+
+
+
+        );
+    });
+});
+$("#Xbox").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
+    var ref = database.ref("ads");
+
+    ref.orderByChild("consola").equalTo("XBOX ONE").on("child_added", function(snapshot) {
+        $("#to-dos").prepend(
+            "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+            "<div class='card-image waves-effect waves-block waves-light'>" +
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+            "</div>"+
+            "<div class='card-content "+snapshot.val().consola+"'>"+
+            "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
+            "</div>"+
+    
+            "<div class='card-details'>"+
+            "<div class=<'col s6'>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
+             "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
+
+             "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
+             "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
+             +"<hr></hr>"+
+             "</div>"+ 
+            "<div class='modal-footer center'>"+
+            "<a href='tel:"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            
+            "<div class='card-reveal'>"+
+            "<span class='card-title titulo"+snapshot.val().consola+"'>"+snapshot.val().item+"</span>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> "+snapshot.val().consola+"</p>"+
+            "<hr></hr>"+
+            "<p ><i class='tiny material-icons'>description</i> "+snapshot.val().description+"</p>"+
+            "<hr></hr>"+
+            "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
+            "<hr></hr>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            "</div>"+
+            "</div>"+
+            "</div>"    
+
+
+
+
+        );
+    });
+});
+$("#3DS").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
+    var ref = database.ref("ads");
+
+    ref.orderByChild("consola").equalTo("NINTENDO 3DS").on("child_added", function(snapshot) {
+        $("#to-dos").prepend(
+            "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+            "<div class='card-image waves-effect waves-block waves-light'>" +
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+            "</div>"+
+            "<div class='card-content "+snapshot.val().consola+"'>"+
+            "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
+            "</div>"+
+    
+            "<div class='card-details'>"+
+            "<div class=<'col s6'>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
+             "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
+
+             "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
+             "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
+             +"<hr></hr>"+
+             "</div>"+ 
+            "<div class='modal-footer center'>"+
+            "<a href='tel:"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            
+            "<div class='card-reveal'>"+
+            "<span class='card-title titulo"+snapshot.val().consola+"'>"+snapshot.val().item+"</span>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> "+snapshot.val().consola+"</p>"+
+            "<hr></hr>"+
+            "<p ><i class='tiny material-icons'>description</i> "+snapshot.val().description+"</p>"+
+            "<hr></hr>"+
+            "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
+            "<hr></hr>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= 'mailto:"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            "</div>"+
+            "</div>"+
+            "</div>"    
+
+
+
+
+        );
+    });
+});
+$("#Accesorios").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
+    var ref = database.ref("ads");
+
+    ref.orderByChild("category").equalTo("Accesorios").on("child_added", function(snapshot) {
+        $("#to-dos").html("");
+        $("#to-dos").prepend(
+            "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+            "<div class='card-image waves-effect waves-block waves-light'>" +
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
             "</div>"+
             "<div class='card-content "+snapshot.val().consola+"'>"+
             "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
@@ -388,15 +835,109 @@ $("#PS4").on("click", function() {
         );
     });
 });
+$("#Consolas").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
+    var ref = database.ref("ads");
 
+    ref.orderByChild("category").equalTo("Consola").on("child_added", function(snapshot) {
+        $("#to-dos").html("");
+        $("#to-dos").prepend(
+            "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+            "<div class='card-image waves-effect waves-block waves-light'>" +
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+            "</div>"+
+            "<div class='card-content "+snapshot.val().consola+"'>"+
+            "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
+            "</div>"+
+    
+            "<div class='card-details'>"+
+            "<div class=<'col s6'>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
+             "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
+
+             "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
+             "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
+             +"<hr></hr>"+
+             "</div>"+ 
+            "<div class='modal-footer center'>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= mailto:'"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            
+            "<div class='card-reveal'>"+
+            "<span class='card-title titulo"+snapshot.val().consola+"'>"+snapshot.val().item+"</span>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> "+snapshot.val().consola+"</p>"+
+            "<hr></hr>"+
+            "<p ><i class='tiny material-icons'>description</i> "+snapshot.val().description+"</p>"+
+            "<hr></hr>"+
+            "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
+            "<hr></hr>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= mailto:'"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            "</div>"+
+            "</div>"+
+            "</div>"    
+
+
+
+
+        );
+    });
+});
+$("#Juegos").on("click", function() { 
+    $("#to-dos").html("No tenemos actualmente articulos");
+    var ref = database.ref("ads");
+
+    ref.orderByChild("category").equalTo("Juego").on("child_added", function(snapshot) {
+        $("#to-dos").prepend(
+            "<div id="+snapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+            "<div class='card-image waves-effect waves-block waves-light'>" +
+            "<img class='activator cardimage' src="+"'"+snapshot.val().image+"'"+"></img>"+"<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
+            "</div>"+
+            "<div class='card-content "+snapshot.val().consola+"'>"+
+            "<span class='activator titulo'>"+snapshot.val().item+"</span>"+
+            "</div>"+
+    
+            "<div class='card-details'>"+
+            "<div class=<'col s6'>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> " +snapshot.val().category+" "+snapshot.val().consola+"</p>"+"<p><i class='tiny material-icons'>class</i> "+snapshot.val().status+"</p>"+"</div>"+
+             "<p><i class='tiny material-icons'>place</i> "+snapshot.val().location+"</p>"+
+
+             "<p><i class='tiny material-icons'>monetization_on</i> "+snapshot.val().price+" MXN</p>"+
+             "<p><i class='tiny material-icons'>date_range</i> "+snapshot.val().dateposted+"</p>"
+             +"<hr></hr>"+
+             "</div>"+ 
+            "<div class='modal-footer center'>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= mailto:'"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            
+            "<div class='card-reveal'>"+
+            "<span class='card-title titulo"+snapshot.val().consola+"'>"+snapshot.val().item+"</span>"+
+            "<p><i class='tiny material-icons'>videogame_asset</i> "+snapshot.val().consola+"</p>"+
+            "<hr></hr>"+
+            "<p ><i class='tiny material-icons'>description</i> "+snapshot.val().description+"</p>"+
+            "<hr></hr>"+
+            "<img class='responsive-img' src='"+snapshot.val().image+"'>"+
+            "<hr></hr>"+
+            "<a href=tel:'"+snapshot.val().phone+"´ class='waves-effect waves-light btn-small z-depth-1 contactar'><i class='material-icons tiny'>call</i></a>"+"<a href= mailto:'"+snapshot.val().email+"´ class='waves-effect waves-light btn-small z-depth-1 contactar2'><i class='material-icons tiny'>mail</i></a>"+
+            "</div>"+
+            "</div>"+
+            "</div>"+
+            "</div>"    
+
+
+
+
+        );
+    });
+});
   database.ref("ads").on("child_added", function(childSnapshot) {
 
     $("#number").html(childSnapshot.val().id+ " "+ "Articulos en venta");
     // full list of items to the well
     $("#to-dos").prepend(
-        "<div id="+childSnapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+
+        "<div id="+childSnapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+ 
         "<div class='card-image waves-effect waves-block waves-light'>" +
-        "<img class='activator cardimage' src="+"'"+childSnapshot.val().image+"'"+"></img>"+
+        "<img class='activator cardimage' src="+"'"+childSnapshot.val().image+"'"+"></img>"+ "<span class='card-title IMG'><i class='small left material-icons IMG1'>featured_video</i></span>"+
         "</div>"+
         "<div class='card-content "+childSnapshot.val().consola+"'>"+
         "<span class='activator titulo'>"+childSnapshot.val().item+"</span>"+
@@ -415,7 +956,7 @@ $("#PS4").on("click", function() {
         "</div>"+
         
         "<div class='card-reveal'>"+
-        "<span class='card-title titulo"+childSnapshot.val().consola+"'>"+childSnapshot.val().item+"</span>"+
+        "<span class='card-title'>"+"<i class='tiny left material-icons IMG2'>close</i>"+childSnapshot.val().item+"</span>"+
         "<p><i class='tiny material-icons'>videogame_asset</i> "+childSnapshot.val().consola+"</p>"+
         "<hr></hr>"+
         "<p ><i class='tiny material-icons'>description</i> "+childSnapshot.val().description+"</p>"+
