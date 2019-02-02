@@ -42,6 +42,13 @@
   .loginicon{
       color: green;
   }
+
+  .chat{
+    background-color: #eee;
+    width: 100%;
+    height: 200px;
+    overflow: scroll;
+  }
   #status{
     color: red;
   }

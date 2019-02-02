@@ -30,7 +30,22 @@ function Nav() {
                     <li><a href="hola" id="numbermobile" className="waves-effect waves-light btn-large banner">0 Articulos en venta</a></li>
                     <li><a href="hola" id="numbermobile1" className="waves-effect waves-light btn-large watchers banner">0 Personas comprando</a></li>
                     <li><a href="hola" id="numbermobile2" className="waves-effect waves-light btn-large watchers banner">0 Usuarios registrados</a></li>
+                    <blockquote>
+      <h4>Chat En Vivo</h4>
+    </blockquote>
+ <div class="collection chat">
+   <ul class="collection">
+<li class= "collection-item avatar">
+<img src="https://pbs.twimg.com/profile_images/1385329550/11__3_400x400.jpg" alt="" class= "circle"></img>
+<span class="title">Adal Loya</span>
+<p>Hola Chat!</p>
+</li>
+
+   </ul>
+  </div>
+
   </ul>
+ 
   </div>
  
     );
