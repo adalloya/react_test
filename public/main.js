@@ -250,11 +250,6 @@ $("#new-register").addClass("disabled")
 
   });
 
-  function upperCaseF(a){
-    setTimeout(function(){
-        a.value = a.value.toUpperCase();
-    }, 1);
-}
 
   $("#searchbutton").on("click", function(event) {
     event.preventDefault();
@@ -318,9 +313,11 @@ ref.orderByChild("consola").equalTo(searchinputcase).on("child_added", function(
 
   $("#uploadButton").on("click", function uploadFile() {
     var filename = selectedFile.name;
-    var storageRef = firebase.storage().ref('/itemimages/'+ filename);
+    var counter=Math.random();
+    var counter2=Math.random();
+    var storageRef = firebase.storage().ref('/itemimages/'+ filename + counter+counter2);
      var uploadTask= storageRef.put(selectedFile);
-
+counter++;
      uploadTask.on('state_changed', function(snapshot){
         // Observe state change events such as progress, pause, and resume
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
