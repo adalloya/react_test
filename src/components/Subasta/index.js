@@ -4,7 +4,7 @@ import React from "react";
 
 function Subasta() {
     return (
-<div id="modalsubasta" className="modal">
+<div id="modalsubasta" className="modal subasta">
     <div className="modal-content subasta">
     <a id="subastabutton" href="#modal1" class="waves-effect waves-light btn modal-trigger"><i class="material-icons left">gavel</i>Publicar anuncio</a>
             <span id="todo-item">
@@ -15,7 +15,7 @@ function Subasta() {
              <form className="col s12">
 
                         <div className="input-field col s12">
-                                    <select id="category">
+                                    <select id="category1">
                                       <option value="" defaultValue>Selecciona una categoria</option>
                                       <option value="Accesorio">Accesorio</option>
                                       <option value="Consola">Consola</option>
@@ -26,7 +26,7 @@ function Subasta() {
                              </div>
 
                                 <div className="input-field col s12">
-                                    <select id="consola">
+                                    <select id="consola1">
                                       <option value="" defaultValue>Selecciona la Consola</option>
                                       <option value="NINTENDO 3DS"> Nintendo 3DS</option>
                                       <option value="CLASICO">Clasico</option>
@@ -41,7 +41,7 @@ function Subasta() {
                                     <label>¿Para que consola es?</label>
                              </div>
                              <div className="input-field col s12">
-                                    <select id="status">
+                                    <select id="status1">
                                       <option value="" defaultValue>Selecciona la condicion</option>
                                       <option value="Nuevo">Nuevo</option>
                                       <option value="Usado">Usado</option>
@@ -49,7 +49,7 @@ function Subasta() {
                                     <label>¿En que condicion está?</label>
                              </div>
                              <div className="input-field col s12">
-                                    <select id="location">
+                                    <select id="location1">
                                       <option value="" defaultValue>Selecciona tu ubicacion</option>
                                       <option value="CDMX">Ciudad de México</option>
                                       <option value="EDOMX">Estado de México</option>
@@ -60,17 +60,17 @@ function Subasta() {
                                     <label>¿Donde lo vendes?</label>
                              </div>
                              <div className="input-field col s12">
-                                <input id="item" type="text" data-length="30" maxLength="30"></input>
+                                <input id="item1" type="text" data-length="30" maxLength="30"></input>
                                 <label htmlFor="item">¿Como se llama tu producto?</label>
                              </div>
                            
                             <div className="input-field col s12">
-                              <textarea id="description" className="materialize-textarea" data-length="240" maxLength="240"></textarea>
+                              <textarea id="description1" className="materialize-textarea" data-length="240" maxLength="240"></textarea>
                               <label htmlFor="description">Describelo brevemente</label>
                             </div>
                                         <div className="input-field col s12">
-                                          <textarea id="price" type="number" className="materialize-textarea" data-length="10" maxLength="10"></textarea>
-                                          <label htmlFor="price">¿En cuanto lo vendes?</label>
+                                          <textarea id="price1" type="number" className="materialize-textarea" data-length="10" maxLength="10"></textarea>
+                                          <label htmlFor="price">¿Cual es el precio inicial?</label>
                                         </div>
                                       <div className= "col s12">
                                       <blockquote>
@@ -80,12 +80,12 @@ function Subasta() {
                                             seleccionar imagen
                                       <input type="file" class="upload-group" id="file"></input>
                                         </label>
-                                      <button type="button" class="btn btn-primary" id="uploadButton" >Agregar imagen</button>
+                                      <button type="button" class="btn btn-primary" id="uploadButtonsubasta" >Agregar imagen</button>
                                       <blockquote id="exito1" class="exito"><h6>¡La carga fue exitosa ya puedes publicar tu anuncio! </h6> </blockquote>
-                                       <h6 id="fileurl"></h6>
+                                       <h6 id="fileurlmobile"></h6>
                                        </div>
                                         <div className="col s12">
-                                                <button id="add-to-do" className="modal-close btn waves-effect waves-light summit disabled" type="submit" name="action">Publicalo
+                                                <button id="add-to-do1" className="modal-close btn waves-effect waves-light summit disabled" type="submit" name="action">Publicalo
                                                         <i className="material-icons right">send</i>
                                                 </button>
                                         </div>

@@ -4,7 +4,8 @@ $(document).ready(function() {
     $("#exito1").hide();
     $("#filerurl").hide();
     $('.tap-target').tapTarget();
-    $('.sidenav').sidenav();
+    $('.sidenav').sidenav(); 
+    $("#uploadButtonsubasta").hide();
   // Initialize Firebase-----------------------------------------------------------------
   var config = {
     apiKey: "AIzaSyC9sJ8GtsGTdC_wZ__CqZX29G03Gah-ns8",
@@ -108,7 +109,10 @@ function validate(){
 
 $('select').formSelect();
 
-$("#subastabutton").on("click", function(event) {});
+$("#subastabutton").on("click", function(event) {
+
+    
+});
 
 $("#add-to-do").on("click", function(event) {
       event.preventDefault();
@@ -162,6 +166,7 @@ $("#add-to-do").addClass("disabled");
 $("#exito").hide();
 $("#exito1").hide();
 $("#uploadButton").hide();
+$("#uploadButtonmobile").hide();
       
     });
 
@@ -254,6 +259,19 @@ $("#new-register").addClass("disabled")
                 });
             });
 
+            $("#misanunciosmobile").on("click", function(event) { 
+                event.preventDefault();
+    
+                database.ref("ads").orderByChild("email").equalTo(userloginemail).on("child_added", function(snapshot) {
+                    $("#userads").prepend(
+                     "<li>"+
+                        "<div class='collapsible-header "+snapshot.val().consola+"'>"+ "<img src='"+snapshot.val().image+"'class='circle myads'></img>"+snapshot.val().item+ " - "+snapshot.val().consola+ " - "+snapshot.val().location+ " - "+ snapshot.val().dateposted+"</div>"+
+                        "<div class='collapsible-body'><span>"+snapshot.val().description+"</span></div>"+
+                     "</li>"
+                    );
+                });
+            });
+
           } else {
             $("#statusmessage").html("El email o el password son incorrectos, intentalo de nuevo");
           }
@@ -317,6 +335,7 @@ ref.orderByChild("consola").equalTo(searchinputcase).on("child_added", function(
   $("#file").on("change",function(event){
     selectedFile= event.target.files[0];
     $("#uploadButton").show();
+    $("#uploadButtonmobile").show();
 
   });
 

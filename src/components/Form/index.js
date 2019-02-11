@@ -6,7 +6,7 @@ function Form() {
     return (
 <div id="modal1" className="modal">
     <div className="modal-content">
-    <a id="subastabutton" href="#modalsubasta" class="waves-effect waves-light btn modal-trigger"><i class="material-icons left">gavel</i>Publicar Subasta</a>
+    {/* <a id="subastabutton" href="#modalsubasta" class="waves-effect waves-light btn modal-trigger"><i class="material-icons left">gavel</i>Publicar Subasta</a> */}
             <span id="todo-item">
             <div className="row">
             <blockquote>
