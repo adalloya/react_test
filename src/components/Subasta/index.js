@@ -2,15 +2,15 @@ import React from "react";
 
 // This file exports the Input, TextArea, and FormBtn components
 
-function Form() {
+function Subasta() {
     return (
-<div id="modal1" className="modal">
-    <div className="modal-content">
-    <a id="subastabutton" href="#modalsubasta" class="waves-effect waves-light btn modal-trigger"><i class="material-icons left">gavel</i>Publicar Subasta</a>
+<div id="modalsubasta" className="modal">
+    <div className="modal-content subasta">
+    <a id="subastabutton" href="#modal1" class="waves-effect waves-light btn modal-trigger"><i class="material-icons left">gavel</i>Publicar anuncio</a>
             <span id="todo-item">
             <div className="row">
             <blockquote>
-      <h4>Publica tu anuncío</h4>
+      <h4 class="subastatitulo">Publica tu subasta</h4>
     </blockquote>
              <form className="col s12">
 
@@ -81,7 +81,7 @@ function Form() {
                                       <input type="file" class="upload-group" id="file"></input>
                                         </label>
                                       <button type="button" class="btn btn-primary" id="uploadButton" >Agregar imagen</button>
-                                      <blockquote id="exito" class="exito"><h6>¡La carga fue exitosa ya puedes publicar tu anuncio! </h6> </blockquote>
+                                      <blockquote id="exito1" class="exito"><h6>¡La carga fue exitosa ya puedes publicar tu anuncio! </h6> </blockquote>
                                        <h6 id="fileurl"></h6>
                                        </div>
                                         <div className="col s12">
@@ -98,4 +98,4 @@ function Form() {
     );
 }
 
-export default Form;
+export default Subasta;

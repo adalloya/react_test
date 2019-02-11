@@ -1,6 +1,7 @@
 $(document).ready(function() {
     $("#uploadButton").hide();
     $("#exito").hide();
+    $("#exito1").hide();
     $("#filerurl").hide();
     $('.tap-target').tapTarget();
     $('.sidenav').sidenav();
@@ -159,6 +160,7 @@ $("#fileurl").html("");
 // Add to the toDoCount
 $("#add-to-do").addClass("disabled");
 $("#exito").hide();
+$("#exito1").hide();
 $("#uploadButton").hide();
       
     });
@@ -349,6 +351,7 @@ counter++;
           $("#fileurl").html(itemimage);
           $("#fileurl").addClass("hide");
           $("#exito").show();
+          $("#exito1").show();
         
         });
       });

@@ -9,6 +9,7 @@ import Myads from "./components/Myads";
 import Filter from "./components/Filter";
 import Search from "./components/Search";
 import Chat from "./components/Chat";
+import Subasta from "./components/Subasta";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Chat/>
       <Footer/>
       <Search/>
+      <Subasta/>
     </div>
   );
 }
