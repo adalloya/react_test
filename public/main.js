@@ -232,23 +232,24 @@ $("#new-register").addClass("disabled")
             $("#email").html(userloginemail);
             $('#usericon').addClass("hide");
             $('#viewicon').removeClass("hide");
+            $('#misanuncios').removeClass("hide");
+            $('#misanunciosmobile').removeClass("hide");
             $('#viewiconmobile').removeClass("hide");
             $("#usernamelog").html("Bienvenido "+userloginname);
             $("#usernamelogmobile").html("Bienvenido "+userloginname);
             $("#userads").html(" ");
-            $("#viewmyadsbutton").on("click", function(event) { 
-            event.preventDefault();
-            console.log(userloginemail);
-            database.ref("ads").orderByChild("email").equalTo(userloginemail).on("child_added", function(snapshot1) {
-                snapshot1.forEach(function(data) {
-                    $("#userads").html(
-                "<li>"+
-                  "<div className='collapsible-header'>"+"<i className='material-icons'>filter_drama</i>"+snapshot1.val().item+ "-"+snapshot1.val().location+"</div>"+
-                  "<div className='collapsible-body'><span>"+snapshot1.val().description+"</span></div>"+
-               "</li>"
-              );  
+            
+            $("#misanuncios").on("click", function(event) { 
+                event.preventDefault();
+    
+                database.ref("ads").orderByChild("email").equalTo(userloginemail).on("child_added", function(snapshot) {
+                    $("#userads").prepend(
+                     "<li>"+
+                        "<div class='collapsible-header "+snapshot.val().consola+"'>"+ "<img src='"+snapshot.val().image+"'class='circle myads'></img>"+snapshot.val().item+ " - "+snapshot.val().consola+ " - "+snapshot.val().location+ " - "+ snapshot.val().dateposted+"</div>"+
+                        "<div class='collapsible-body'><span>"+snapshot.val().description+"</span></div>"+
+                     "</li>"
+                    );
                 });
-            });
             });
 
           } else {
@@ -267,8 +268,6 @@ $("#new-register").addClass("disabled")
 
     $("#to-dos").html("No tenemos actualmente articulos con el termino "+"' "+searchinputcase+ " '"+" intenta con otra palabra");
     var ref = database.ref("ads");
-
-console.log(searchinput);
 
 ref.orderByChild("consola").equalTo(searchinputcase).on("child_added", function(snapshot) {
     $("#to-dos").prepend(

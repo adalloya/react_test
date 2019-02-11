@@ -48,7 +48,7 @@ function Registration() {
                                     </p>
                              <div className="row">
                                         <div className="input-field col s12">
-                                        <a href="hola" id="new-register" className=" close-modal waves-effect waves-light btn-small disable">Registrarte</a>
+                                        <a href="hola" id="new-register" className="close-modal waves-effect waves-light btn-small disable">Registrarte</a>
                                           </div>
                                           </div>
             </form>

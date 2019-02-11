@@ -11,7 +11,6 @@ function Myads() {
     </blockquote>
     <div>
             <p>Aqui podras ver y administrar todos tus anuncios publicados</p>
-                                          <button id="viewmyadsbutton" className="btn waves-effect waves-light modal-close">Buscar<i className="material-icons right">send</i></button>
 <ul className="collapsible popout collection" id="userads">
   </ul>
     </div>
