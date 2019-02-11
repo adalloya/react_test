@@ -6,6 +6,7 @@ function Form() {
     return (
 <div id="modal1" className="modal">
     <div className="modal-content">
+    <a id="subastabutton" class="waves-effect waves-light btn"><i class="material-icons left">gavel</i>Publicar Subasta</a>
             <span id="todo-item">
             <div className="row">
             <blockquote>

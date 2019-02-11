@@ -92,10 +92,17 @@
     color: white !important;
   }
   
-  .PS4, PS3, VITA{
+  .PS4 {
     background: rgb(28, 40, 212);
   }
 
+  .VITA{
+    background: rgb(30, 34, 99);
+  }
+
+  .PS3{
+  background: rgb(28, 40, 212);
+}
   .IMG{
       padding: 0 !important;
       align-content: left !important;
@@ -116,14 +123,18 @@
   .XBOX{
     background: rgb(2, 156, 48);
   }
-  
-  .SWITCH, WIIU{
+  .collapsible-header{
+    background: rgb(219, 54, 178) !important;
+    color: white !important;
+  }
+  .SWITCH{
     background: rgb(218, 41, 10);
   }
-  
+  .WIIU{
+    background: purple;
+  }
   .NINTENDO{
-    background:rgb(206, 204, 204);
-    color: red !important;
+    background:rgb(63, 62, 62);
   }
   
   .CLASICO{

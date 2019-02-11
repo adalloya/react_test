@@ -107,6 +107,8 @@ function validate(){
 
 $('select').formSelect();
 
+$("#subastabutton").on("click", function(event) {});
+
 $("#add-to-do").on("click", function(event) {
       event.preventDefault();
 
@@ -216,6 +218,7 @@ $("#new-register").addClass("disabled")
           userloginphone= data.val().userphone;
           userloginlocation =data.val().userlocation;
           userloginemail =data.val().useremail;
+          
 
         });
         if (userlogin===contraseñalogin) {
@@ -229,18 +232,23 @@ $("#new-register").addClass("disabled")
             $("#email").html(userloginemail);
             $('#usericon').addClass("hide");
             $('#viewicon').removeClass("hide");
+            $('#viewiconmobile').removeClass("hide");
             $("#usernamelog").html("Bienvenido "+userloginname);
             $("#usernamelogmobile").html("Bienvenido "+userloginname);
-            database.ref('ads').orderByChild("email").equalTo(userloginemail).on("value", function(snapshot) {
-                snapshot.forEach(function(data) {
+            $("#userads").html(" ");
+            $("#viewmyadsbutton").on("click", function(event) { 
+            event.preventDefault();
+            console.log(userloginemail);
+            database.ref("ads").orderByChild("email").equalTo(userloginemail).on("child_added", function(snapshot1) {
+                snapshot1.forEach(function(data) {
                     $("#userads").html(
                 "<li>"+
-                  "<div className='collapsible-header'>"+"<i className='material-icons'>filter_drama</i>"+snapshot.val().item+"</div>"+
-                  "<div className='collapsible-body'><span>"+snapshot.val().description+"</span></div>"+
+                  "<div className='collapsible-header'>"+"<i className='material-icons'>filter_drama</i>"+snapshot1.val().item+ "-"+snapshot1.val().location+"</div>"+
+                  "<div className='collapsible-body'><span>"+snapshot1.val().description+"</span></div>"+
                "</li>"
               );  
                 });
-            
+            });
             });
 
           } else {

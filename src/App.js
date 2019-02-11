@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Myads from "./components/Myads";
 import Filter from "./components/Filter";
 import Search from "./components/Search";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Form/>
       <Registration/>
       <Login/>
+      <Chat/>
       <Footer/>
       <Search/>
     </div>
