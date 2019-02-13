@@ -31,10 +31,10 @@ function Registration() {
                                         </div>
                                         <div className="row">
                                         <blockquote>
-                                                <h6>¿No estas registrado aún? Házlo solo toma 10 segundos</h6>
+                                                <h6>¿No estas registrado aún? ¡Házlo! Solo toma 10 segundos</h6>
                                           </blockquote>
                                         <div className="input-field col s12">
-                                          <button href="#modal3"className="btn waves-effect waves-light modal-trigger" type="submit" name="action">Registrate <i className="material-icons right">send</i>
+                                          <button href="#modal3"className="btn waves-effect waves-light modal-trigger" type="submit" name="action">Regístrate <i className="material-icons right">send</i>
                                           </button>
                                           </div>
                                           </div>

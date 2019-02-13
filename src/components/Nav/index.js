@@ -38,7 +38,7 @@ function Nav() {
 <li class= "collection-item avatar">
 <img src="https://pbs.twimg.com/profile_images/1385329550/11__3_400x400.jpg" alt="" class= "circle"></img>
 <span class="title">Adal Loya</span>
-<p>Hola Chat!</p>
+<p>Hola, Aquí podrás hacer solicitudes de juegos que buscas o platicar sobre videojuegos!</p>
 </li>
 </ul>
 <a href="#modal9" class="waves-effect waves-light btn modal-trigger"><i class="material-icons right">send</i>Escribir mensaje</a>

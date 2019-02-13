@@ -5,7 +5,7 @@ function Filter() {
         <div id="modal5" className="modal bottom-sheet">
         <div className="modal-content">
         <blockquote>
-    <h4>Filtrar por categoria</h4>
+    <h4>Filtrar por categoría</h4>
 <a class="waves-effect waves-light btn filtros" id="Ver">Ver Todo</a>
   <a class="waves-effect waves-light btn filtros" id="Accesorios">Accesorios</a>
   <a class="waves-effect waves-light btn filtros" id="Consolas1">Consolas</a>

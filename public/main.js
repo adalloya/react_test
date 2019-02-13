@@ -73,7 +73,7 @@ registerusers.on("value",function(snap){
     $("#number2").text(snap.numChildren());
     $("#number2").append(""+ " "+"Usuarios Registrados")
     $("#numbermobile2").text(snap.numChildren());
-    $("#numbermobile2").append(""+ " "+"Usuarios Registrados")
+    $("#numbermobile2").append(""+ " "+"Registrados")
 })
 
  // ON BUTTON SELECT FORM-----------------------------------------------------------------
@@ -1004,7 +1004,7 @@ $("#Juegos").on("click", function() {
 });
   database.ref("ads").on("child_added", function(childSnapshot) {
 
-    $("#number").html(childSnapshot.val().id+ " "+ "Articulos en venta");
+    $("#number").html(childSnapshot.val().id+ " "+ "Artículos en venta");
     // full list of items to the well
     $("#to-dos").prepend(
         "<div id="+childSnapshot.val().id+" " + "class='card col s12 m4 l4 xl3 hoverable card'>"+ 

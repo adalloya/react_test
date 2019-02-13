@@ -8,7 +8,7 @@ function Registration() {
     <div className="modal-content">
             <div className="row">
             <blockquote>
-      <h4>Regístro</h4>
+      <h4>Registro</h4>
     </blockquote>
              <form className="col s12">
               
@@ -18,7 +18,7 @@ function Registration() {
                                         </div>
                                         <div className="input-field col s12">
                                           <input id="userphone" type="tel" className="validate" data-length="10" maxLength="10"></input>
-                                          <label htmlFor="userphone">WhatsApp 10 Numeros</label>
+                                          <label htmlFor="userphone">WhatsApp 10 Números</label>
                                         </div>
                              <div className="input-field col s12">
                                 <input id="useremail" type="text" className="validate" data-length="30" maxLength="30"></input>
@@ -26,14 +26,14 @@ function Registration() {
                              </div>
                              <div className="input-field col s12">
                                     <select id="userlocation"className="validate" >
-                                      <option value="" defaultValue>Selecciona tu ubicacion</option>
+                                      <option value="" defaultValue>Selecciona tu ubicación</option>
                                       <option value="CDMX">Ciudad de México</option>
                                       <option value="EDOMX">Estado de México</option>
                                       <option value="Toluca">Toluca</option>
-                                      <option value="Queretaro">Queretaro</option>
+                                      <option value="Queretaro">Querétaro</option>
                                       <option value="Otro">Otro</option>
                                     </select>
-                                    <label>¿Donde Vives?</label>
+                                    <label>¿Dónde vives?</label>
                              </div>
                              <div className="input-field col s12">
                                           <input id="userpassword" type="password"  className="validate" data-length="10" maxLength="10"></input>
@@ -43,7 +43,7 @@ function Registration() {
                                      <p>
                                      <label>
                                     <input id= "aviso" type="checkbox"/>
-                                    <span>Acepto Aviso de privacidad y Terminos y Condiciones </span>
+                                    <span>Acepto Aviso de Privacidad y Términos y Condiciones </span>
                                      </label>
                                     </p>
                              <div className="row">

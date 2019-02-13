@@ -10,13 +10,13 @@ function Form() {
             <span id="todo-item">
             <div className="row">
             <blockquote>
-      <h4>Publica tu anuncío</h4>
+      <h4>Publica tu anuncio</h4>
     </blockquote>
              <form className="col s12">
 
                         <div className="input-field col s12">
                                     <select id="category">
-                                      <option value="" defaultValue>Selecciona una categoria</option>
+                                      <option value="" defaultValue>Selecciona una categoría</option>
                                       <option value="Accesorio">Accesorio</option>
                                       <option value="Consola">Consola</option>
                                       <option value="Juego">Juego</option>
@@ -29,7 +29,7 @@ function Form() {
                                     <select id="consola">
                                       <option value="" defaultValue>Selecciona la Consola</option>
                                       <option value="NINTENDO 3DS"> Nintendo 3DS</option>
-                                      <option value="CLASICO">Clasico</option>
+                                      <option value="CLASICO">Clásico</option>
                                       <option value="PS3">PS3</option>
                                       <option value="PS4">PS4</option>
                                       <option value="SWITCH">Switch</option>
@@ -38,35 +38,35 @@ function Form() {
                                       <option value="XBOX ONE">XBOX ONE</option>
                                   
                                     </select>
-                                    <label>¿Para que consola es?</label>
+                                    <label>¿Para qué consola es?</label>
                              </div>
                              <div className="input-field col s12">
                                     <select id="status">
-                                      <option value="" defaultValue>Selecciona la condicion</option>
+                                      <option value="" defaultValue>Selecciona la condición</option>
                                       <option value="Nuevo">Nuevo</option>
                                       <option value="Usado">Usado</option>
                                     </select>
-                                    <label>¿En que condicion está?</label>
+                                    <label>¿En qué condición está?</label>
                              </div>
                              <div className="input-field col s12">
                                     <select id="location">
-                                      <option value="" defaultValue>Selecciona tu ubicacion</option>
+                                      <option value="" defaultValue>Selecciona tu ubicación</option>
                                       <option value="CDMX">Ciudad de México</option>
                                       <option value="EDOMX">Estado de México</option>
                                       <option value="Toluca">Toluca</option>
-                                      <option value="Queretaro">Queretaro</option>
+                                      <option value="Queretaro">Querétaro</option>
                                       <option value="Otro">Otro</option>
                                     </select>
-                                    <label>¿Donde lo vendes?</label>
+                                    <label>¿Dónde lo vendes?</label>
                              </div>
                              <div className="input-field col s12">
                                 <input id="item" type="text" data-length="30" maxLength="30"></input>
-                                <label htmlFor="item">¿Como se llama tu producto?</label>
+                                <label htmlFor="item">¿Cómo se llama tu producto?</label>
                              </div>
                            
                             <div className="input-field col s12">
                               <textarea id="description" className="materialize-textarea" data-length="240" maxLength="240"></textarea>
-                              <label htmlFor="description">Describelo brevemente</label>
+                              <label htmlFor="description">Descríbelo brevemente</label>
                             </div>
                                         <div className="input-field col s12">
                                           <textarea id="price" type="number" className="materialize-textarea" data-length="10" maxLength="10"></textarea>
@@ -74,7 +74,7 @@ function Form() {
                                         </div>
                                       <div className= "col s12">
                                       <blockquote>
-                                        <h6>Agrega una imagen del producto que vas a vender, primero selecciona el archivo y luego da click en en agregar para adjuntarla al anuncio</h6>
+                                        <h6>Agrega una imagen del producto que vas a vender, primero selecciona el archivo y luego da click en en "agregar" para poder adjuntarla al anuncio</h6>
                                        </blockquote>
                                      <label class="upload-group waves-effect waves-light btn">
                                             seleccionar imagen
@@ -85,7 +85,7 @@ function Form() {
                                        <h6 id="fileurl"></h6>
                                        </div>
                                         <div className="col s12">
-                                                <button id="add-to-do" className="modal-close btn waves-effect waves-light summit disabled" type="submit" name="action">Publicalo
+                                                <button id="add-to-do" className="modal-close btn waves-effect waves-light summit disabled" type="submit" name="action">Publícalo
                                                         <i className="material-icons right">send</i>
                                                 </button>
                                         </div>

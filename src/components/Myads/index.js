@@ -10,7 +10,7 @@ function Myads() {
       <h4>Mis anuncios</h4>
     </blockquote>
     <div>
-            <p>Aqui podras ver y administrar todos tus anuncios publicados</p>
+            <p>Aquí podrás ver y administrar todos tus anuncios publicados</p>
 <ul className="collapsible popout collection" id="userads">
   </ul>
     </div>
